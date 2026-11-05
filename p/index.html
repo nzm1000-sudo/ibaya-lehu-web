@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>המראה הזוגית · אִיבַּעְיָא לְהוּ</title>
+<style>
+  :root { --bg:#FBF8F2; --ink:#2A2420; --soft:#7A6F66; --acc:#9C6B2F; --card:#fff; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#1A1714; --ink:#F2EBDD; --soft:#B5AA9B; --acc:#D8AE6A; --card:#25201B; } }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; background:var(--bg); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+         display:flex; align-items:center; justify-content:center; padding:24px 16px; }
+  main { width:100%; max-width:420px; text-align:center; }
+  h1 { font-size:26px; margin:0 0 6px; }
+  .sub { color:var(--soft); margin:0 0 24px; }
+  .card { background:var(--card); border-radius:22px; padding:22px 18px; box-shadow:0 6px 24px rgba(0,0,0,.08); }
+  .steps { font-size:17px; line-height:1.7; margin:0 0 18px; }
+  .code { font-size:44px; font-weight:700; letter-spacing:.18em; direction:ltr; color:var(--acc); margin:6px 0 16px; word-break:break-all; }
+  button, a.btn { display:block; width:100%; font:inherit; font-size:17px; padding:14px; border-radius:16px; border:1px solid var(--acc);
+                  background:transparent; color:var(--acc); cursor:pointer; text-decoration:none; margin-top:10px; }
+  .primary { background:var(--acc); color:var(--bg); }
+</style>
+</head>
+<body>
+<main>
+  <h1>המראה הזוגית</h1>
+  <p class="sub" id="sub">הוזמנתם לענות יחד</p>
+  <div class="card">
+    <p class="steps">פתחו את האפליקציה ← החדרים ← המראה הזוגית ← יש לי קוד</p>
+    <div class="code" id="code">—</div>
+    <button id="copy" class="primary" type="button">העתקת הקוד</button>
+    <a class="btn" id="app" href="#">פתיחה באפליקציה</a>
+    <a class="btn" id="web" href="../pair/">אין לי את האפליקציה: לפתוח בדפדפן</a>
+  </div>
+</main>
+<script>
+  var c = (new URLSearchParams(location.search).get('c') || '').replace(/[^A-Za-z0-9-]/g, '').slice(0, 32);
+  // The inviter's first name (Hebrew or Latin letters, up to 12), forwarded with the code.
+  var n = (new URLSearchParams(location.search).get('n') || '').replace(/[^\u05D0-\u05EAA-Za-z]/g, '').slice(0, 12);
+  var q = 'c=' + encodeURIComponent(c) + (n ? '&n=' + encodeURIComponent(n) : '');
+  var app = 'ibayalehu://pair?' + q;
+  var full = n ? c + ' (' + n + ')' : c;
+  if (n) document.getElementById('sub').textContent = n + ' הזמין/ה אותך למראה הזוגית';
+  document.getElementById('code').textContent = c || '—';
+  document.getElementById('app').href = app;
+  document.getElementById('web').href = '../pair/' + (c ? '?' + q : '');
+  document.getElementById('copy').onclick = function () {
+    var b = this;
+    navigator.clipboard.writeText(full).then(function () { b.textContent = 'הועתק'; setTimeout(function () { b.textContent = 'העתקת הקוד'; }, 2000); });
+  };
+  if (c) location.href = app; // try the app right away; the page stays as the fallback
+</script>
+</body>
+</html>

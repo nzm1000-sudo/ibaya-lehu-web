@@ -1,0 +1,11 @@
+/* "מבית ניצוצא": an obviously clickable credit pill */
+.nz-credit{display:flex;justify-content:center;margin:22px auto 0;padding:0 14px;text-align:center}
+.nz-credit a{display:inline-flex;align-items:center;gap:9px;max-width:100%;padding:9px 18px;border-radius:999px;border:1px solid rgba(168,131,58,.6);background:rgba(168,131,58,.1);color:inherit;font:inherit;font-size:.95em;line-height:1.4;text-decoration:none;cursor:pointer;transition:transform .25s,background .25s,border-color .25s,box-shadow .25s}
+.nz-credit a b{font-weight:700;border-bottom:1.5px solid #c9a24e}
+.nz-credit a:hover,.nz-credit a:focus-visible{background:rgba(201,162,78,.24);border-color:#c9a24e;transform:translateY(-2px);box-shadow:0 10px 22px -12px rgba(168,131,58,.9)}
+.nz-credit a:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.nz-credit svg{width:16px;height:16px;flex:none}
+.nz-credit .nz-ar{transition:transform .25s}
+.nz-credit a:hover .nz-ar{transform:translate(-2px,-2px)}
+.nz-credit .nz-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.nz-credit a,.nz-credit .nz-ar{transition:none}}
